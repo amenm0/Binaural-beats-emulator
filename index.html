@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Binaural Beats Comparison</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .container {
+      background-color: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+      width: 400px;
+      text-align: center;
+    }
+    h1 {
+      color: #333;
+    }
+    .slider-container {
+      margin: 20px 0;
+    }
+    .slider {
+      width: 100%;
+    }
+    .output {
+      margin-top: 10px;
+      font-weight: bold;
+    }
+    .info {
+      font-size: 14px;
+      color: #555;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h1>Binaural Beats</h1>
+  <p>Adjust the sliders to hear the binaural beat difference.</p>
+
+  <!-- Left ear frequency slider -->
+  <div class="slider-container">
+    <label for="left-frequency">Left Ear Frequency (Hz): </label>
+    <input type="range" id="left-frequency" class="slider" min="100" max="1000" value="440" step="1">
+    <div class="output" id="left-output">440 Hz</div>
+  </div>
+
+  <!-- Right ear frequency slider -->
+  <div class="slider-container">
+    <label for="right-frequency">Right Ear Frequency (Hz): </label>
+    <input type="range" id="right-frequency" class="slider" min="100" max="1000" value="450" step="1">
+    <div class="output" id="right-output">450 Hz</div>
+  </div>
+
+  <div id="difference-output" class="output">Frequency Difference: 10 Hz</div>
+
+  <!-- Instructions for users -->
+  <div class="info">
+    <p>To hear binaural beats, make sure you are wearing stereo headphones.</p>
+    <p>Adjust the sliders and listen to the difference in frequencies.</p>
+  </div>
+</div>
+
+<script>
+  // Getting DOM elements
+  const leftFrequencySlider = document.getElementById('left-frequency');
+  const rightFrequencySlider = document.getElementById('right-frequency');
+  const leftOutput = document.getElementById('left-output');
+  const rightOutput = document.getElementById('right-output');
+  const differenceOutput = document.getElementById('difference-output');
+
+  // Update output for left frequency slider
+  leftFrequencySlider.addEventListener('input', function() {
+    const leftFrequency = leftFrequencySlider.value;
+    leftOutput.textContent = `${leftFrequency} Hz`;
+    updateDifference();
+    playBinauralBeats();
+  });
+
+  // Update output for right frequency slider
+  rightFrequencySlider.addEventListener('input', function() {
+    const rightFrequency = rightFrequencySlider.value;
+    rightOutput.textContent = `${rightFrequency} Hz`;
+    updateDifference();
+    playBinauralBeats();
+  });
+
+  // Function to calculate and display frequency difference
+  function updateDifference() {
+    const leftFrequency = parseFloat(leftFrequencySlider.value);
+    const rightFrequency = parseFloat(rightFrequencySlider.value);
+    const difference = Math.abs(leftFrequency - rightFrequency);
+    differenceOutput.textContent = `Frequency Difference: ${difference} Hz`;
+  }
+
+  // Function to simulate binaural beat sound (no real sound here)
+  function playBinauralBeats() {
+    // Logic to generate binaural beats can go here.
+    // For now, we'll just simulate a 'play' action.
+    const leftFrequency = leftFrequencySlider.value;
+    const rightFrequency = rightFrequencySlider.value;
+
+    // Normally, you'd use the Web Audio API to generate sine waves at the given frequencies.
+    // For this example, we'll just log the frequencies.
+    console.log(`Playing binaural beats: Left Ear - ${leftFrequency} Hz, Right Ear - ${rightFrequency} Hz`);
+  }
+
+  // Initial setup
+  updateDifference();
+</script>
+
+</body>
+</html>
